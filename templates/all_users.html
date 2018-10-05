@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>search</title>
+    <style>
+        .base{
+            overflow: hidden;
+        }
+        .base li{
+            float:left;
+            list-style: none;
+            margin:0 20px;
+        }
+        lable{
+            color:red;
+        }
+    </style>
+</head>
+<body>
+
+  <ul class="base">
+
+      <li><a href="{% url 'all_users' %}">所有用户</a></li>
+      <li><a href="{% url 'search' %}">查询</a></li>
+      <li><a href="{% url 'insert' %}">插入</a></li>
+      <li><a href="{% url 'delete' %}">删除</a></li>
+      <li><a href="{% url 'modify' %}">修改</a></li>
+
+  </ul>
+  <h1 style="...">所有用户</h1>
+  <table>
+      <thead>
+        <th>序号</th>
+        <th>姓名</th>
+        <th>学号</th>
+        <th>课程名</th>
+        <th>成绩</th>
+      </thead>
+      <tbody>
+        {% for dic in data %}
+            <tr>
+                <td>{{dic.id   }}</td>
+                <td>{{dic.name }}</td>
+                <td>{{dic.stid }}</td>
+                <td>{{dic.csnm }}</td>
+                <td>{{dic.grade}}</td>
+            </tr>
+         {% empty %}
+            <lable>没有任何信息</lable>
+        {% endfor %}
+
+      </tbody>
+  </table>
+
+</body>
+</html>
