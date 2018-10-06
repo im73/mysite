@@ -1,20 +1,25 @@
-import pymysql as sql
-
+from django.db import connection as con
 
 class  mysql_con(object):
 
     def __init__(self):
 
-        self.get_conn()
+        self.conn=con
+        cursor=self.conn.cursor()
 
 
-    def get_conn(self):
+
+
+    def close_conn(self):
 
         try:
-            self.conn = sql.connect("localhost", "root", "13179Zqs", "test", charset='utf8' )
-        except sql.Error as e:
-            print('Error:%s'%e)
-            exit()
+            if self.conn:
+                self.conn.close()
+        except con.Error as e:
+            print('Error: %s'%e)
+
+
+
 
     def show_allusers(self):
 
@@ -36,13 +41,7 @@ class  mysql_con(object):
         cursor.close()
         return rest
 
-    def close_conn(self):
 
-        try:
-            if self.conn:
-                self.conn.close()
-        except sql.Error as e:
-            print('Error: %s'%e)
 
 
 

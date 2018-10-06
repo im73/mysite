@@ -1,33 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>search</title>
+{% extends 'index.html' %}
+
+
+{%  block title %}新增成绩{% endblock %}
+
+{% block style %}
     <style>
-        .base{
-            overflow: hidden;
-        }
-        .base li{
-            float:left;
-            list-style: none;
-            margin:0 20px;
-        }
-        lable{
-            color:red;
-        }
-    </style>
-</head>
-<body>
+    table,table thead th,table tbody tr td{
+    border:1px solid #0094ff;
+}
+    table{
+    width:200px;min-height:25px;line-height:25px;text-align:center;
+    border-collapse:collapse;
+}
+</style>
+{% endblock %}
 
-  <ul class="base">
+{% block content %}
 
-      <li><a href="{% url 'all_users' %}">所有用户</a></li>
-      <li><a href="{% url 'search' %}">查询</a></li>
-      <li><a href="{% url 'insert' %}">插入</a></li>
-      <li><a href="{% url 'delete' %}">删除</a></li>
-      <li><a href="{% url 'modify' %}">修改</a></li>
-
-  </ul>
   <h1 style="...">所有用户</h1>
   <table>
       <thead>
@@ -53,5 +42,5 @@
       </tbody>
   </table>
 
-</body>
-</html>
+
+{% endblock %}
