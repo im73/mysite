@@ -1,30 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>search</title>
-    <style>
-        .base{
-            overflow: hidden;
-        }
-        .base li{
-            float:left;
-            list-style: none;
-            margin:0 20px;
-        }
-    </style>
-</head>
-<body>
+{% extends 'index.html' %}
 
-  <ul class="base">
 
-      <li><a href="{% url 'all_users' %}">所有用户</a></li>
-      <li><a href="{% url 'search' %}">查询</a></li>
-      <li><a href="{% url 'insert' %}">插入</a></li>
-      <li><a href="{% url 'delete' %}">删除</a></li>
-      <li><a href="{% url 'modify' %}">修改</a></li>
+{%  block title %}查询用户{% endblock %}
 
-  </ul>
 
-</body>
-</html>
+
+{% block content %}
+
+
+    <form method="post" action="{% url 'search' %}">
+
+      <label for="stid">学号:</label>
+      <input type="text"  name="stid" id="username" value="" /><br />
+
+      <input type="submit" value="确定"  name="submit" />
+      <input type="reset" value="重置" name="reset" />
+    </form>
+
+
+{% endblock %}

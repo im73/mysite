@@ -29,15 +29,32 @@ def insert(request):
 
 
 def delete(request):
-
+    db = con.mysql_con()
+    if request.method=='POST':
+        stid = request.POST.get("stid",None)
+        db.delete(stid)
+    db.close_conn()
     return  render(request,"delete.html")
 
 
 def search(request):
-
-    return  render(request,"search.html")
+    db = con.mysql_con()
+    if request.method=='POST':
+        stid = request.POST.get("stid",None)
+        dicts = db.searchbyid(stid)
+        db.close_conn()
+        return render(request, "search_result.html", {"data": dicts})
+    else:
+       db.close_conn()
+       return render(request, "search.html")
 
 
 
 def modify(request):
+    db = con.mysql_con()
+    if request.method=='POST':
+        stid = request.POST.get("stid",None)
+        grade = request.POST.get("grade",None)
+        db.modify(stid, grade)
+    db.close_conn()
     return  render(request,"modify.html")

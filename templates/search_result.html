@@ -1,0 +1,34 @@
+{% extends 'index.html' %}
+
+
+{%  block title %}查询结果{% endblock %}
+
+
+
+{% block content %}
+
+  <table>
+      <thead>
+        <th>序号</th>
+        <th>姓名</th>
+        <th>学号</th>
+        <th>课程名</th>
+        <th>成绩</th>
+      </thead>
+      <tbody>
+        {% for dic in data %}
+            <tr>
+                <td>{{dic.id   }}</td>
+                <td>{{dic.name }}</td>
+                <td>{{dic.stid }}</td>
+                <td>{{dic.csnm }}</td>
+                <td>{{dic.grade}}</td>
+            </tr>
+         {% empty %}
+            <lable>没有任何信息</lable>
+        {% endfor %}
+
+      </tbody>
+  </table>
+
+{% endblock %}
