@@ -64,13 +64,15 @@ class  mysql_con(object):
         try:
             sql_order = 'select * from transcript where stid =%s;'
             cursor = self.conn.cursor()
+
             cursor.execute(sql_order % stid)
             data=cursor.fetchone()
+
             if data:
-                rest = dict(zip([k[0] for k in cursor.description], cursor.fetchone()))
+                rest = dict(zip([k[0] for k in cursor.description], data))
             else:
                 rest = None
-            print("查询失败")
+            print("查询成功")
         except:
             print("查询失败")
         cursor.close()
@@ -84,6 +86,7 @@ class  mysql_con(object):
 
             sql_order = 'delete from transcript where stid =%s;'
             cursor = self.conn.cursor()
+
             cursor.execute(sql_order % stid)
             self.conn.commit()
             print("删除成功")

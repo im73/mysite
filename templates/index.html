@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}search{% endblock %}</title>
-<link rel="stylesheet" href="{% static 'index.css' %}" >
+<link rel="stylesheet" href="{% static 'css/index.css' %}" >
     {% block css %}
     {% endblock %}
 </head>
@@ -13,11 +13,6 @@
     {% block head %}
   <ul class="base">
 
-      <li><a href="{% url 'all_users' %}">所有用户</a></li>
-      <li><a href="{% url 'search' %}">查询</a></li>
-      <li><a href="{% url 'insert' %}">插入</a></li>
-      <li><a href="{% url 'delete' %}">删除</a></li>
-      <li><a href="{% url 'modify' %}">修改</a></li>
 
   </ul>
     {% endblock %}

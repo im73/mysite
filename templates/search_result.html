@@ -16,17 +16,16 @@
         <th>成绩</th>
       </thead>
       <tbody>
-        {% for dic in data %}
+        {% if data %}
             <tr>
-                <td>{{dic.id   }}</td>
-                <td>{{dic.name }}</td>
-                <td>{{dic.stid }}</td>
-                <td>{{dic.csnm }}</td>
-                <td>{{dic.grade}}</td>
+                <td>{{data.id   }}</td>
+                <td>{{data.name }}</td>
+                <td>{{data.stid }}</td>
+                <td>{{data.csnm }}</td>
+                <td>{{data.grade}}</td>
             </tr>
-         {% empty %}
-            <lable>没有任何信息</lable>
-        {% endfor %}
+
+        {% endif %}
 
       </tbody>
   </table>

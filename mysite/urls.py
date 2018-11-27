@@ -19,11 +19,9 @@ from cmdb import views
 urlpatterns = [
 
     path(r'index/', views.index, name='home'),
-    path(r'all_users/', views.all_users,name='all_users'),
-    path(r'delete/', views.delete,name='delete'),
-    path(r'search/', views.search,name='search'),
-    path(r'insert/', views.insert,name='insert'),
-    path(r'modify/', views.modify,name='modify'),
+    path(r'login/', views.login, name='login'),
+    path(r'register/', views.register, name='register'),
+
 
 ]
 
