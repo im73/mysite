@@ -1,3 +1,5 @@
+
+
 body{font-family:'Microsoft Yahei';font-size:12px;color:#666;}
 html,body{height:100%}
 /* 顶部样式 */
@@ -104,7 +106,7 @@ html,body{height:100%}
 
 
 .slide{width:760px;height:270px;position:relative;overflow:hidden;}
-.slide .slide_pics{position:relative;left:0;top:0;width:760px;height:270px;}
+
 .slide .slide_pics li{width:760px;height:270px;position:absolute;left:0;top:0}
 .slide .prev,.slide .next{width:17px;height:23px;background:url(../images/icons.png) left -388px no-repeat;position:absolute;left:11px;top:122px;cursor:pointer;}
 .slide .next{background-position:left -428px;left:732px;}

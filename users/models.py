@@ -14,7 +14,7 @@ class UserProfile(AbstractUser):
     password = models.CharField(max_length=18,null=False,verbose_name=u"密码")
     mobile = models.CharField(max_length=11,null=False)
     major = models.CharField(max_length=20,null=False)
-    image= models.ImageField(upload_to="image/%Y/%m",default=u"images/profile.png",max_length=100)
+    image= models.ImageField(upload_to="image/%Y/%m",default=u"static/images/profile.png",max_length=100)
     email = models.EmailField(max_length=50, verbose_name=u"邮箱")
     qq = models.EmailField(max_length=50, verbose_name=u"qq")
     grade = models.CharField(max_length=10,verbose_name=u"年级",default="大一")

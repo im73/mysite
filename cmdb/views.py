@@ -1,14 +1,12 @@
-from django.http import HttpResponse
+from PIL import Image
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect,reverse
-
 
 from cmdb import models
 from cmdb import db_con as con
 from users.models import UserProfile
 import re
 # Create your views here.
-def index(request):
-    return render(request,"index.html")
 
 
 def all_users(request):
@@ -26,7 +24,7 @@ def register(request):
         gender = request.POST.get('gender')
         mobile = request.POST.get('mobile')
         major = request.POST.get('major')
-        image = request.POST.get('image')
+        image = request.FILES.get('image')
         email = request.POST.get('email')
         qq = request.POST.get('qq')
         grade = request.POST.get('grade')
@@ -44,7 +42,7 @@ def register(request):
             # 进行业务处理:注册，向账户系统中添加账户
             # Passport.objects.create(username=username, password=password, email=email)
         try:
-            user=UserProfile(nick_name=nick_name,gender=gender,mobile=mobile,major=major,email=email,qq=qq,password=password)
+            user=UserProfile(username=nick_name,nick_name=nick_name,gender=gender,mobile=mobile,major=major,image=image,email=email,qq=qq,password=password)
             if image!=None :
                 user.image=image
             if grade!=None :
@@ -52,24 +50,26 @@ def register(request):
             user.save()
         except Exception as e:
             print("e: ", e)  # 把异常打印出来
-            return render(request, 'users/register.html', {'errmsg': '用户名已存在！'})
+            return render(request, 'register.html', {'errmsg': '用户名已存在！'})
 
             # 注册完，还是返回注册页。
-            return render(request, 'register.html', {'errmsg': 'success'})
+        return render(request, 'login.html', {'users': user})
     return render(request, 'register.html')
 
 def login(request):
     if request.method=="POST":
+        request.session.clear_expired()
         username = request.POST.get('username')
         password = request.POST.get('password')
         if not all([username, password,]):
             # 有数据为空
-            return render(request,"login.html",  {'errmsg': '用户名或密码为空'})
+            return render (request,"login.html",  {'errmsg': '用户名或密码为空'})
         users=UserProfile.objects.filter(nick_name=username,password=password)
         if users :
-            return render( request,"index.html")
+            request.session['userName'] = username
+            return HttpResponseRedirect(reverse('home'))
         else:
-            print("sfbhs")
+
             return render(request,"login.html",{'errmsg':'用户名或密码输入错误'})
     return render(request,"login.html",{'errmsg':None})
 

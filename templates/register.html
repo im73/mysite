@@ -19,8 +19,8 @@
         <div class="wp header-box">
             <p class="fl hd-tips">北航二手交易平台！</p>
             <ul class="fr hd-bar">
-                <li class="active"><a href="login.html">[登录]</a></li>
-                <li><a href="register.html">[注册]</a></li>
+                <li class="active"><a href="../login">[登录]</a></li>
+                <li><a href="../register">[注册]</a></li>
             </ul>
         </div>
     </div>
@@ -29,9 +29,9 @@
     <div class="c-box bg-box">
         <div class="login-box clearfix">
             <div class="hd-login clearfix">
-                <a class="index-logo" href="index.html"></a>
+                <a class="index-logo" href="../register"></a>
                 <h1>用户注册</h1>
-                <a class="index-font" href="index.html">回到首页</a>
+                <a class="index-font" href="../index">回到首页</a>
             </div>
             <div class="fl form-box">
                 <div class="tab">
@@ -40,11 +40,12 @@
                 </div>
 
                 <div class="tab-form">
-                    <form action={% url 'register' %} id="email_register_form" method="post"  autocomplete="off">
+                    <form action={% url 'register' %} id="email_register_form" method="post"  autocomplete="off" enctype="multipart/form-data">
+
                         <input type='hidden' name='csrfmiddlewaretoken' value='gTZljXgnpvxn0fKZ1XkWrM1PrCGSjiCZ' />
                         <div class="form-group marb8 ">
                             <label>用 户 名</label>
-                            <input  type="text" id="id_email" name="username" value="" placeholder="请输入您的邮箱地址" />
+                            <input  type="text" id="id_email" name="username" value="" placeholder="请输入用户名" />
                         </div>
                         <div class="form-group marb8 ">
                             <label>密     码</label>
@@ -82,7 +83,7 @@
 
                         <div class="form-group marb8 ">
                             <label>专    业</label>
-                            <select name="major">
+                            <select name="major" class="">
                                 <option value="材料科学与工程" >材料科学与工程</option>
                                 <option value="电子信息工程">电子信息工程</option>
                                 <option value="自动化科学与电气工程">自动化科学与电气工程</option>
@@ -98,19 +99,23 @@
                             </select>
                         </div>
 
-                        <div class="form-group"><label >头       像 </label>
+                        <div class="form-group marb8 ">
+                            <label >头       像 </label>
+                            {% csrf_token %}
                             <input type="file" name="image" />选择图片<br />
                         </div>
 
-                        <div class="error btns" id="jsEmailTips"></div>
-                        <div class="auto-box marb8">
+                        <div>
+                            {% if errmsg %}
+                             <lable class="warn">{{ errmsg }}</lable>
+                            {% endif %}
                         </div>
-                        <input class="btn btn-green" id="jsEmailRegBtn" type="submit" value="注册" />
+                        <div class="auto-box marb8">
+                            <input class="btn btn-green" id="jsEmailRegBtn" type="submit" value="注册" />
+                        </div>
+
                     <input type='hidden' name='csrfmiddlewaretoken' value='5I2SlleZJOMUX9QbwYLUIAOshdrdpRcy' />
                     </form>
-                     {% if errmsg %}
-                             <lable class="warn">{{ errmsg }}</lable>
-                     {% endif %}
                 </div>
                 <p class="form-p">已有账号？<a href="{% url 'login' %}">[立即登录]</a></p>
             </div>

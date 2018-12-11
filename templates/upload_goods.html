@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" >
+	<title>北航跳骚市场登录</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/reset.css" >
+	<link rel="stylesheet" type="text/css" href="../static/css/upload.css" >
+</head>
+<script>
+    function check(){
+    var i= document.getElementById("type").value;
+    if(i=="校园卡"){
+        document.getElementById("room").style.display="none"
+        document.getElementById("times").style.display="block"
+        document.getElementById("timed").style.display="block"
+    }
+    else if(i=="床位出租"){
+        document.getElementById("room").style.display="block"
+        document.getElementById("times").style.display="none"
+        document.getElementById("timed").style.display="none"
+    }
+    else
+    {
+        document.getElementById("room").style.display="none"
+        document.getElementById("times").style.display="none"
+        document.getElementById("timed").style.display="none"
+    }
+
+    }
+
+
+     function slt_image() {
+        var i= document.getElementById("type").value;
+        if (i)
+        {
+            document.getElementById("image").style.display="block"
+        }
+        else{
+            document.getElementById("image").style.display="none"
+        }
+
+     }
+</script>
+<body>
+<header>
+    <div class="c-box fff-box">
+        <div class="wp header-box">
+            <p class="fl hd-tips">北航二手交易平台！</p>
+            <ul class="fr hd-bar">
+                {% if username %}
+                    <li class="active"><a href="../user">{{ username }}</a></li>
+                    <li><a href="../trolly">购物车</a></li>
+                {% else %}
+                    <li class="active"><a href="../login">[登录]</a></li>
+                    <li><a href="../register">[注册]</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</header>
+<section>
+    <div class="c-box bg-box">
+        <div class="login-box clearfix">
+
+            <div class="form-box">
+                <div class="tab">
+                    <h2>上传商品</h2>
+                </div>
+                <div class="tab-form">
+                    <form action={% url 'uploadgoods' %} id="email_register_form" method="post"  autocomplete="off" enctype="multipart/form-data">
+
+                        <input type='hidden' name='csrfmiddlewaretoken' value='gTZljXgnpvxn0fKZ1XkWrM1PrCGSjiCZ' />
+                        <div class="form-group marb8 ">
+                            <label>商品名称</label>
+                            <input  type="text" id="goods_name" name="goodsname" value="" placeholder="请输入商品名称" />
+                        </div>
+
+
+                        <div class="form-group marb8 ">
+                            <label>商品描述</label>
+                            <input type="text" id="detail_msg" name="desc"  value="" placeholder="请输入商品详细描述" />
+                        </div>
+
+                        <div class="form-group marb8 ">
+                            <label>商品种类</label>
+                            <select name="type" id="type" onchange="check()">
+
+                                <option value="" >--请选择--</option>
+                                <option value="校园卡" >校园卡</option>
+                                 <option value="床位出租" >床位出租</option>
+                                <option value="考研资料">考研资料</option>
+                                <option value="电子设备">电子设备</option>
+                                <option value="教材">教材</option>
+                                <option value="其他">其他</option>
+
+                            </select>
+                        </div>
+
+{#                        {% if card %}#}
+                            <div class="form-group marb8 " id="times" style="display: none">
+                                <label>开始时间</label>
+                                <input type="date"  name="from_time"  value=""  />
+                            </div>
+
+                           <div class="form-group marb8 " id="timed" style="display: none">
+                                <label>结束时间</label>
+                                <input type="date"  name="to_time"  value=""  />
+                            </div>
+{#                        {% endif %}#}
+{#                        {% if room %}#}
+                            <div class="form-group marb8 " id="room" style="display: none">
+                                <label>详细地址</label>
+                                <input type="text"  name="location"  value="" placeholder="请输入详细地址" />
+                            </div>
+{#                        {% endif %}#}
+                        <div class="form-group marb8 ">
+                            <label>数量</label>
+                            <input type="text"  name="num"  value="" placeholder="请输入拥有数量" />
+                        </div>
+
+                        <div class="form-group marb8 ">
+                            <label>单价</label>
+                            <input type="text"  name="price"   placeholder="请输入单价" />
+                        </div>
+
+                       <div class="form-group marb8 " onchange="slt_image()">
+                            <label >实物图片</label>
+                            {% csrf_token %}
+                            <input type="file" name="image" />选择图片<br />
+                        </div>
+
+
+                        <div class="form-group marb8 " id="image">
+                                <img src="{{ img.url }}" style="width: 20px; height: 20px;"><br/>
+                        </div>
+
+
+                        <div>
+                            {% if errmsg %}
+                             <lable class="warn">{{ errmsg }}</lable>
+                            {% endif %}
+                        </div>
+                        <div class="auto-box marb8">
+                            <input class="btn btn-green" id="jsEmailRegBtn" type="submit" value="提交" />
+                        </div>
+
+                    <input type='hidden' name='csrfmiddlewaretoken' value='5I2SlleZJOMUX9QbwYLUIAOshdrdpRcy' />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

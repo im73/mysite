@@ -15,13 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from cmdb import views
+from cmdb import views as vsindex
+
+from goods import views as vsgoods
+from django.conf.urls.static import static
+from django.conf import settings
 urlpatterns = [
 
-    path(r'index/', views.index, name='home'),
-    path(r'login/', views.login, name='login'),
-    path(r'register/', views.register, name='register'),
+    path(r'index/', vsgoods.index, name='home'),
+    path(r'login/', vsindex.login, name='login'),
+    path(r'register/', vsindex.register, name='register'),
+    path(r'uploadgoods/', vsgoods.upload_goods, name='uploadgoods'),
 
 
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
