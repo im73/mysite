@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" >
+    <title>北航跳蚤市场</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/reset.css" >
+	<link rel="stylesheet" type="text/css" href="../static/css/index.css" >
+    <link rel="stylesheet" type="text/css" href="../static/css/login.css" >
+</head>
+<body>
+
+<div class="bg" id="dialogBg"></div>
+<header>
+    <div class="c-box fff-box">
+        <div class="wp header-box">
+            <p class="fl hd-tips">北航二手交易平台！</p>
+            <ul class="fr hd-bar">
+                <li class="active"><a href="../user">{{ user.nick_name }}</a></li>
+                <li><a href="../uploadgoods">上传物品</a></li>
+                <li><a href="../trolly">购物车</a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+<section>
+    <div class="c-box bg-box">
+        <div class="login-box clearfix">
+            <div class="hd-login clearfix">
+                <a class="index-font" href="../index">回到首页</a>
+            </div>
+            <div class="main_con clearfix">
+        		<div class="left_menu_con clearfix">
+                    <div class="navbar_con">
+		                <div class="navbar">
+                			<h1 class="fl">用户中心</h1>
+
+                		</div>
+            	    </div>
+                    <form action="{% url 'user_order' %}" method="post" autocomplete="off">
+        			<ul class="subnav fl">
+        				<li><a href="../user">· 个人信息</a></li>
+        				<li><a href="../user_order/?page={{ pages }}" class="active">· 全部订单</a></li>
+        				<li><a href="../user_addr">· 收货地址</a></li>
+        			</ul>
+                    </form>>
+        		</div>
+                <div class="right_content clearfix">
+                    <div class="info_con clearfix">
+                        <div class="navbar_con">
+    		                <div class="navbar">
+                    			<h1 class="fl">全部订单</h1>
+                    		</div>
+                	    </div>
+                        {% for order in order_li %}
+                        <ul class="order_list_th w978 clearfix">
+                            <li class="col01">下单时间：{{ order.add_time }}</li>
+                            <li class="col02">订单号：{{ order.id }}</li>
+                            <li class="col02 stress">订单状态：{{ order.state}}</li>
+                            <li class="col04">总价：{{ order.price }}元</li>
+                            <dd>地址：{{ addr.province }} {{ addr.city }} {{ addr.districts }} {{ addr.street }} {{ addr.detaile }}（{{ addr.name }} 收） {{ addr.mobile }}</dd>
+                        </ul>
+                        {% endfor %}
+                         <div class="pagenation">
+                            {% if order_li.has_previous %}
+                                <a href="../user_order/?page={{ order_li.previous_page_number }}">上一页</a>
+                            {% endif %}
+                            {% for page in pages %}
+                                {% if page == order_li.number %}
+                                    <a href="../user_order/?page={{ pages }}" class="active">{{ page }}</a>
+                                {% else %}
+                                    <a href="../user_order/?page={{ pages }}">{{ page }}</a>
+                                {% endif %}
+                            {% endfor %}
+                            {% if order_li.has_next %}
+                                <a href="../user_order/?page={{ order_li.next_page_number }}">下一页</a>
+                            {% endif %}
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

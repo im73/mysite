@@ -18,6 +18,7 @@ from django.urls import path
 from cmdb import views as vsindex
 
 from goods import views as vsgoods
+from users import views as vsusers
 from django.conf.urls.static import static
 from django.conf import settings
 urlpatterns = [
@@ -26,7 +27,10 @@ urlpatterns = [
     path(r'login/', vsindex.login, name='login'),
     path(r'register/', vsindex.register, name='register'),
     path(r'uploadgoods/', vsgoods.upload_goods, name='uploadgoods'),
-
+    path(r'user/', vsusers.user_info, name='user'),
+    path(r'user_order/', vsusers.user_order, name='user_order'),
+    path(r'user_addr/', vsusers.user_address, name='user_addr'),
+    path(r'addr_add/', vsusers.add_address, name='addr_add'),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" >
+    <title>北航跳蚤市场</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/reset.css" >
+	<link rel="stylesheet" type="text/css" href="../static/css/index.css" >
+    <link rel="stylesheet" type="text/css" href="../static/css/upload.css" >
+</head>
+<body>
+<div class="bg" id="dialogBg"></div>
+<header>
+    <div class="c-box fff-box">
+        <div class="wp header-box">
+            <p class="fl hd-tips">北航二手交易平台！</p>
+            <ul class="fr hd-bar">
+                <li class="active"><a href="../user">{{ user.nick_name }}</a></li>
+                <li><a href="../uploadgoods">上传物品</a></li>
+                <li><a href="../trolly">购物车</a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+
+<section>
+    <div class="c-box bg-box">
+        <div class="login-box clearfix">
+
+            <div class="form-box">
+                <div class="tab">
+                    <h2>添加地址</h2>
+                </div>
+                <div class="tab-form">
+                    <form action={% url 'addr_add' %} id="email_register_form" method="post"  autocomplete="off" enctype="multipart/form-data">
+
+                        <input type='hidden' name='csrfmiddlewaretoken' value='gTZljXgnpvxn0fKZ1XkWrM1PrCGSjiCZ' />
+                        <div class="form-group marb8 ">
+                            <label>收货人姓名</label>
+                            <input  type="text" id="addr_name" name="name" value="" placeholder="请输入收货人姓名" />
+                        </div>
+
+
+                        <div class="form-group marb8 ">
+                            <label>收货人手机号</label>
+                            <input type="text" id="addr_mobile" name="mobile"  value="" placeholder="请输入手机号码" />
+                        </div>
+
+                        <div class="form-group marb8 ">
+                            <label>省份</label>
+                            <input type="text" id="addr_province" name="province"  value="" placeholder="请输入省份" />
+                        </div>
+
+                        <div class="form-group marb8 ">
+                            <label>城市</label>
+                            <input type="text" id="addr_city" name="city"  value="" placeholder="请输入城市" />
+                        </div>
+
+                        <div class="form-group marb8 ">
+                            <label>区/县</label>
+                            <input type="text" id="addr_districts" name="districts"  value="" placeholder="请输入区/县" />
+                        </div>
+
+                        <div class="form-group marb8 ">
+                            <label>街道</label>
+                            <input type="text" id="addr_street" name="street"  value="" placeholder="请输入街道" />
+                        </div>
+
+                        <div class="form-group marb8 ">
+                            <label>详细地址</label>
+                            <input type="text" id="addr_detaile" name="detaile"  value="" placeholder="请输入详细地址，不要超过100个字" />
+                        </div>
+
+                        <div>
+                            {% if errmsg %}
+                             <lable class="warn">{{ errmsg }}</lable>
+                            {% endif %}
+                        </div>
+                        <div class="auto-box marb8">
+                            <input class="btn btn-green" id="jsEmailRegBtn" type="submit" value="提交" />
+                        </div>
+
+                    <input type='hidden' name='csrfmiddlewaretoken' value='5I2SlleZJOMUX9QbwYLUIAOshdrdpRcy' />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
