@@ -2,6 +2,7 @@ body{
     width:100%;
     height:100%;
     background: #0b7dc5;
+
 }
 a:hover{
     text-decoration:underline;
@@ -12,7 +13,7 @@ a:hover{
     overflow:hidden;
 }
 .fff-box{
-    background:#fff;
+    background: white;
 }
 .bg-box{
     background:url(../images/bg.png) no-repeat center center;

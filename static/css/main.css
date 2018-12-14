@@ -642,3 +642,15 @@ html,body{height:100%}
 .stress{
 	color:#ff8800;
 }
+
+.empty
+{
+	height: 100px;
+}
+.emptytext
+{
+	font-size: large;
+	position: center;
+	text-align: center;
+}
+

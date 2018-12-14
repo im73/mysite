@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from cmdb import views as vsindex
-
+from operation import views as vsop
 from goods import views as vsgoods
 from django.conf.urls.static import static
 from django.conf import settings
@@ -26,6 +26,10 @@ urlpatterns = [
     path(r'login/', vsindex.login, name='login'),
     path(r'register/', vsindex.register, name='register'),
     path(r'uploadgoods/', vsgoods.upload_goods, name='uploadgoods'),
+    path(r'search/', vsgoods.search, name='search'),
+    path(r'detail/', vsgoods.detail, name='detail'),
+    path(r'add_trolly/', vsop.add_trolly, name='add_trolly'),
+    path(r'trolly/', vsop.trolly, name='trolly'),
 
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

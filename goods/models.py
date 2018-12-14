@@ -2,6 +2,7 @@ from datetime import datetime
 from time import timezone
 
 from django.db import models
+
 #_*_coding:utf-8_*_
 # Create your models here.
 

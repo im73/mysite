@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>北航跳骚市场-搜索</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/main.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/login.css" >
+</head>
+<script>
+    function order_by_name()
+    {
+        {{  goods_set.order_by}}
+        document.getElementById("name").className="active";
+        document.getElementById("time").className="";
+        document.getElementById("price").className="";
+    }
+    function order_by_price()
+    {
+
+        document.getElementById("price").className="active";
+        document.getElementById("name").className="";
+        document.getElementById("time").className="";
+    }
+    function order_by_time()
+    {
+
+        document.getElementById("time").className="active";
+        document.getElementById("name").className="";
+        document.getElementById("price").className="";
+    }
+</script>
+<body>
+<div class="bg" id="dialogBg"></div>
+<header>
+    <div class="c-box fff-box">
+        <div class="wp header-box">
+            <p class="fl hd-tips">北航二手交易平台！</p>
+            <ul class="fr hd-bar">
+                {% if user %}
+                    <li class="active"><a href="../user.html">{{ user.nick_name }}</a></li>
+                    <li><a href="../uploadgoods">上传物品</a></li>
+                    <li><a href="../trolly">购物车</a></li>
+                {% else %}
+                    <li class="active"><a href="../login">[登录]</a></li>
+                    <li><a href="../register">[注册]</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</header>
+
+	<div class="search_bar clearfix">
+        <a href="index.html" class="logo fl"><img src="images/logo.png" style="width: 160px; height: 53px;"></a>
+		<div class="search_con fl">
+            <form method="post" action={% url 'search' %}>
+			<input type="text" class="input_text fl" name="msg" placeholder="搜索商品">
+			<input type="submit" class="input_btn fr" name="" value="搜索">
+            </form>>
+		</div>
+
+	</div>
+
+	<div class="navbar_con">
+		<div class="navbar clearfix">
+			<div class="subnav_con fl">
+				<h1>全部商品分类</h1>
+				<span></span>
+				<ul class="subnav">
+					<li><a href="../search/?type=校园卡" class="python">校园卡</a></li>
+					<li><a href="../search/?type=床位出租" class="javascript">床位出租</a></li>
+					<li><a href="../search/?type=考研资料" class="algorithms">考研资料</a></li>
+					<li><a href="../search/?type=电子设备" class="machinelearning">电子设备</a></li>
+					<li><a href="../search/?type=教材" class="operatingsystem">教材</a></li>
+					<li><a href="../search/?type=其他" class="database">其他</a></li>
+				</ul>
+			</div>
+			<ul class="navlist fl">
+				<li><a href="../index">首页</a></li>
+				<li class="interval">|</li>
+
+			</ul>
+		</div>
+	</div>
+
+	<div class="breadcrumb">
+		<a href="#">全部分类</a>
+		<span>></span>
+        {% if type %}
+		    <a href="#">{{ type }}</a>
+        {% else %}
+            <a href="#">搜索结果</a>
+        {% endif %}
+	</div>
+
+	<div class="main_wrap clearfix">
+
+
+		<div class="r_wrap fr clearfix">
+			<div class="sort_bar">
+				<a href="#" id="name" onclick="order_by_name()">名字</a>
+				<a href="#" id="price" onclick="order_by_price()">价格</a>
+				<a href="#" id="time" onclick="order_by_time()">发布时间</a>
+			</div>
+
+			<ul class="book_type_list clearfix">
+                {% for good in goods_set %}
+				<li>
+					<a href="../detail/?good_id={{ good.id}}"><img src={{ good.image.url }}></a>
+					<h4><a href="../detail/?good_id={{ good.id}}">{{ good.name }}</a></h4>
+					<div class="operate">
+						<span class="prize">{{ good.price }}</span>
+
+						<a href="#" class="add_book" title="加入购物车"></a>
+					</div>
+				</li>
+                {% empty %}
+                    <span class="prize">没有查询到结果</span>
+                {% endfor %}
+
+			</ul>
+
+			<div class="pagenation">
+				<a href="#">上一页</a>
+				<a href="#" class="active">1</a>
+				<a href="#">下一页></a>
+			</div>
+		</div>
+	</div>
+
+
+
+</body>
+</html>

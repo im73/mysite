@@ -32,10 +32,11 @@
 <div class="search_bar clearfix">
 		<a href="index.html" class="logo fl"><img src="images/logo.png" style="width: 160px; height: 53px;"></a>
 		<div class="search_con fl">
-			<input type="text" class="input_text fl" name="" placeholder="搜索商品">
-			<input type="button" class="input_btn fr" name="" value="搜索">
+			<form method="post" action={% url 'search' %}>
+			<input type="text" class="input_text fl" name="msg" placeholder="搜索商品">
+			<input type="submit" class="input_btn fr" name="" value="搜索">
+            </form>>
 		</div>
-
 	</div>
 
 	<div class="navbar_con">
@@ -68,7 +69,7 @@
 	<div class="list_model">
 		<div class="list_title clearfix">
 			<h3 class="fl" id="model01">校园卡</h3>
-			<a href="#" class="book_more fr">查看更多 ></a>
+			<a href="../search/?type=校园卡" class="book_more fr">查看更多 ></a>
 		</div>
 
 		<div class="book_con clearfix">
@@ -76,8 +77,8 @@
 			<ul class="book_list fl">
                 {% for card in cards %}
                     <li>
-					    <h4><a href="#">{{ card.name }}</a></h4>
-					    <a href="#"><img src={{ card.image.url }}></a>
+					    <h4><a href="../detail/?good_id={{ card.id}}">{{ card.name }}</a></h4>
+					    <a href="../detail/?good_id={{ card.id}}"><img src={{ card.image.url }}></a>
 					    <div class="prize">¥ {{ card.price }}</div>
 				    </li>
                 {% endfor %}
@@ -88,7 +89,7 @@
 	<div class="list_model">
 		<div class="list_title clearfix">
 			<h3 class="fl" id="model02">床位出租</h3>
-			<a href="#" class="book_more fr">查看更多 ></a>
+			<a href="../search/?type=床位出租"  class="book_more fr">查看更多 ></a>
 		</div>
 
 		<div class="book_con clearfix">
@@ -96,8 +97,8 @@
 			<ul class="book_list fl">
                 {% for rm in room %}
                     <li>
-					    <h4><a href="#">{{ rm.name }}</a></h4>
-					    <a href="#"><img src={{ rm.image.url }}></a>
+					    <h4><a href="../detail/?good_id={{ rm.id}}">{{ rm.name }}</a></h4>
+					    <a href="../detail/?good_id={{ rm.id}}"><img src={{ rm.image.url }}></a>
 					    <div class="prize">¥ {{ rm.price }}</div>
 				    </li>
                 {% endfor %}
@@ -108,7 +109,7 @@
 	<div class="list_model">
 		<div class="list_title clearfix">
 			<h3 class="fl" id="model03">考研资料</h3>
-			<a href="#" class="book_more fr">查看更多 ></a>
+			<a href="../search/?type=考研资料" class="book_more fr">查看更多 ></a>
 		</div>
 
 		<div class="book_con clearfix">
@@ -116,8 +117,8 @@
 			<ul class="book_list fl">
                 {% for pt in postgraduate %}
                     <li>
-					    <h4><a href="#">{{ pt.name }}</a></h4>
-					    <a href="#"><img src={{ pt.image.url }}></a>
+					    <h4><a href="../detail/?good_id={{ pt.id}}">{{ pt.name }}</a></h4>
+					    <a href="../detail/?good_id={{ pt.id}}"><img src={{ pt.image.url }}></a>
 					    <div class="prize">¥ {{ pt.price }}</div>
 				    </li>
                 {% endfor %}
@@ -129,7 +130,7 @@
 		<div class="list_title clearfix">
 			<h3 class="fl" id="model04">电子设备</h3>
 
-			<a href="#" class="book_more fr">查看更多 ></a>
+			<a href="../search/?type=电子设备" class="book_more fr">查看更多 ></a>
 		</div>
 
 		<div class="book_con clearfix">
@@ -137,8 +138,8 @@
 			<ul class="book_list fl">
                 {% for dv in device %}
                     <li>
-					    <h4><a href="#">{{ dv.name }}</a></h4>
-					    <a href="#"><img src={{ dv.image.url }}></a>
+					    <h4><a href="../detail/?good_id={{ dv.id}}">{{ dv.name }}</a></h4>
+					    <a href="../detail/?good_id={{ dv.id}}"><img src={{ dv.image.url }}></a>
 					    <div class="prize">¥ {{ dv.price }}</div>
 				    </li>
                 {% endfor %}
@@ -150,7 +151,7 @@
 		<div class="list_title clearfix">
 			<h3 class="fl" id="model05">教材</h3>
 
-			<a href="#" class="book_more fr">查看更多 ></a>
+			<a href="../search/?type=教材" class="book_more fr">查看更多 ></a>
 		</div>
 
 		<div class="book_con clearfix">
@@ -158,8 +159,8 @@
 			<ul class="book_list fl">
                 {% for tm in teachingmeterial %}
                     <li>
-					    <h4><a href="#">{{ tm.name }}</a></h4>
-					    <a href="#"><img src={{ tm.image.url }}></a>
+					    <h4><a href="../detail/?good_id={{ tm.id}}">{{ tm.name }}</a></h4>
+					    <a href="../detail/?good_id={{ tm.id}}"><img src={{ tm.image.url }}></a>
 					    <div class="prize">¥ {{ tm.price }}</div>
 				    </li>
                 {% endfor %}
@@ -170,7 +171,7 @@
 	<div class="list_model">
 		<div class="list_title clearfix">
 			<h3 class="fl" id="model06">其他</h3>
-			<a href="#" class="book_more fr">查看更多 ></a>
+			<a href="../search/?type=其他" class="book_more fr">查看更多 ></a>
 		</div>
 
 		<div class="book_con clearfix">
@@ -178,8 +179,8 @@
 			<ul class="book_list fl">
                 {% for item in others %}
                     <li>
-					    <h4><a href="#">{{ item.name }}</a></h4>
-					    <a href="#"><img src={{ item.image.url }}></a>
+					    <h4><a href="../detail/?good_id={{ item.id}}">{{ item.name }}</a></h4>
+					    <a href="../detail/?good_id={{ item.id}}"><img src={{ item.image.url }}></a>
 					    <div class="prize">¥ {{ item.price }}</div>
 				    </li>
                 {% endfor %}

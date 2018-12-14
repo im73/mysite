@@ -8,8 +8,7 @@ dicts={'校园卡':1,'床位出租':2,'考研资料':3,'电子设备':4,'教材'
 
 def upload_goods(request):
 
-    if not request.session.get('userName',None) :
-
+    if not request.session.get('userName',None):
         return render(request, "login.html")
     if request.method =="POST":
         name = request.POST.get('goodsname')
@@ -41,15 +40,18 @@ def upload_goods(request):
             new_goods.save()
         except Exception as e:
             print("e: ", e)  # 把异常打印出来
-            return render(request, 'upload_goods.html', {'errmsg': '未知类型错误'})
+            return render(request, 'upload_goods.html', {'username':nick_name,'errmsg': '未知类型错误'})
 
             # 注册完，还是返回注册页。
-        return render(request, 'upload_goods.html')
+        return render(request, 'upload_goods.html',{'username':nick_name})
     nick_name = request.session.get('userName')
     return render(request, 'upload_goods.html',{'username':nick_name})
 def index(request):
     nick_name=request.session.get('userName',None)
-    user = UserProfile.objects.get(nick_name=nick_name)
+    try:
+        user = UserProfile.objects.get(nick_name=nick_name)
+    except:
+        user=None
     cards = Goods.objects.filter(type=1)
     room = Goods.objects.filter(type=2)
     postgraduate = Goods.objects.filter(type=3)
@@ -58,3 +60,34 @@ def index(request):
     others = Goods.objects.filter(type=6)
     return render(request,'index.html',
                   {'cards':cards,'room':room,'postgraduate':postgraduate,'device':device,'teachingmeterial':teachingmeterial,'others':others,'user':user})
+def search(request):
+
+    nick_name = request.session.get('userName', None)
+    try:
+        user = UserProfile.objects.get(nick_name=nick_name)
+    except:
+        user = None
+    if request.method=="POST":
+        msg=request.POST.get('msg')
+        goods_set=Goods.objects.filter(name__iexact=msg)
+
+        return render(request,'search.html',{'user':user,'goods_set':goods_set})
+    type=request.GET.get('type')
+
+    if type:
+        type_s=type
+        type=dicts[type]
+        goods_set=Goods.objects.filter(type=type)
+
+        return render(request,'search.html',{'user':user,'goods_set':goods_set,'type':type_s})
+
+    return render(request,'search.html',{'user':user})
+def detail(request):
+    nick_name = request.session.get('userName', None)
+    try:
+        user = UserProfile.objects.get(nick_name=nick_name)
+    except:
+        user = None
+    good_id=request.GET.get('good_id')
+    good=Goods.objects.get(id=good_id)
+    return render(request,'detail.html',{'good':good,'user':user})
