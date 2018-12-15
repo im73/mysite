@@ -52,12 +52,12 @@ def index(request):
         user = UserProfile.objects.get(nick_name=nick_name)
     except:
         user=None
-    cards = Goods.objects.filter(type=1)
-    room = Goods.objects.filter(type=2)
-    postgraduate = Goods.objects.filter(type=3)
-    device= Goods.objects.filter(type=4)
-    teachingmeterial = Goods.objects.filter(type=5)
-    others = Goods.objects.filter(type=6)
+    cards = Goods.objects.filter(type=1,num__gt=0)
+    room = Goods.objects.filter(type=2,num__gt=0)
+    postgraduate = Goods.objects.filter(type=3,num__gt=0)
+    device= Goods.objects.filter(type=4,num__gt=0)
+    teachingmeterial = Goods.objects.filter(type=5,num__gt=0)
+    others = Goods.objects.filter(type=6,num__gt=0)
     return render(request,'index.html',
                   {'cards':cards,'room':room,'postgraduate':postgraduate,'device':device,'teachingmeterial':teachingmeterial,'others':others,'user':user})
 def search(request):
@@ -69,7 +69,7 @@ def search(request):
         user = None
     if request.method=="POST":
         msg=request.POST.get('msg')
-        goods_set=Goods.objects.filter(name__iexact=msg)
+        goods_set=Goods.objects.filter(name__contains=msg,num__gt=0)
 
         return render(request,'search.html',{'user':user,'goods_set':goods_set})
     type=request.GET.get('type')
@@ -77,11 +77,13 @@ def search(request):
     if type:
         type_s=type
         type=dicts[type]
-        goods_set=Goods.objects.filter(type=type)
+        goods_set=Goods.objects.filter(type=type,num__gt=0)
 
         return render(request,'search.html',{'user':user,'goods_set':goods_set,'type':type_s})
 
     return render(request,'search.html',{'user':user})
+
+
 def detail(request):
     nick_name = request.session.get('userName', None)
     try:
@@ -91,3 +93,4 @@ def detail(request):
     good_id=request.GET.get('good_id')
     good=Goods.objects.get(id=good_id)
     return render(request,'detail.html',{'good':good,'user':user})
+

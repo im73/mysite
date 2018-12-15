@@ -3,7 +3,7 @@ from datetime import datetime
 from django.db import models
 #_*_coding:utf-8_*_
 # Create your models here.
-from django.db.models.signals import pre_save, pre_init
+from django.db.models.signals import pre_save, pre_init, post_save
 from django.dispatch import receiver
 
 from users.models import UserProfile, Useradress
@@ -23,10 +23,13 @@ class UserFavorite(models.Model):
 class UserOrder(models.Model):
 
     add_time = models.DateTimeField(default=datetime.now,verbose_name=u"添加时间")
-    state = models.IntegerField(verbose_name=u"订单状态")
-
+    state = models.IntegerField(verbose_name=u"订单状态",default=0)
+    goods = models.ForeignKey(Goods,related_name=u"购买商品",on_delete=models.CASCADE)
+    num = models.IntegerField(default=1,verbose_name="购买数量")
     price = models.FloatField(verbose_name=u"总价",default=0)
     adress = models.ForeignKey(Useradress,related_name=u"收货地址",on_delete=models.DO_NOTHING,default=u"")
+    buyer = models.ForeignKey(UserProfile,related_name=u"收货人",on_delete=models.DO_NOTHING)
+
     class Meta:
         verbose_name=u"订单"
         verbose_name_plural=verbose_name
@@ -68,10 +71,15 @@ class Trolly(models.Model):
         verbose_name=u"购物车商品"
         verbose_name_plural=verbose_name
 
-# @receiver(pre_init,sender=Trolly)
-# def check_Trolly(sender, **kwargs):
-#     rst=Trolly.objects.filter(goods=kwargs['goods'],user=kwargs['user'])
-#     if rst:
-#         kwargs['num']=rst.values('num')+kwargs['num']
-#         rst.delete()
+
+
+@receiver(post_save,sender=UserOrder)
+def check_Order(**kwargs):
+    Trolly.objects.get(goods=kwargs['instance'].goods).delete()
+    kwargs['instance'].goods.num=kwargs['instance'].goods.num-kwargs['instance'].num
+    kwargs['instance'].goods.save()
+     # rst=Trolly.objects.filter(goods=kwargs['goods'],user=kwargs['user'])
+     # if rst:
+     #     kwargs['num']=rst.values('num')+kwargs['num']
+     #     rst.delete()
 

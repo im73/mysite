@@ -25,7 +25,7 @@
             <p class="fl hd-tips">北航二手交易平台！</p>
             <ul class="fr hd-bar">
                 {% if user %}
-                    <li class="active"><a href="../user.html">{{ user.nick_name }}</a></li>
+                    <li class="active"><a href="../user">{{ user.nick_name }}</a></li>
                     <li><a href="../uploadgoods">上传物品</a></li>
                     <li><a href="../trolly">购物车</a></li>
                 {% else %}
@@ -38,7 +38,7 @@
 </header>
 
 	<div class="search_bar clearfix">
-		<a href="index.html" class="logo fl"><img src="images/logo.png" style="width: 160px; height: 53px;"></a>
+		<a href="index.html" class="logo fl"><img src="../static/images/buaa.jpg" style="width: 120px; height: 80px;"></a>
 		<div class="sub_page_name fl">|&nbsp;&nbsp;&nbsp;&nbsp;购物车</div>
 		<div class="search_con fr">
 			<input type="text" class="input_text fl" name="" placeholder="搜索商品">
@@ -81,10 +81,9 @@
 
 
 	<ul class="settlements">
-		<li class="col01"><input type="checkbox" name="" checked=""></li>
-		<li class="col02">全选</li>
+
 		<li class="col03">合计(不含运费)：<span>¥</span><em>{{ total_price }}</em><br>共计<b>{{ total_num }}</b>件商品</li>
-		<li class="col04"><a href="place_order.html">去结算</a></li>
+		<li class="col04"><a href="../order">去结算</a></li>
 	</ul>
 
 

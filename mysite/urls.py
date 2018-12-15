@@ -16,8 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from cmdb import views as vsindex
-
+from operation import views as vsop
 from goods import views as vsgoods
+from users import views as vsusers
 from django.conf.urls.static import static
 from django.conf import settings
 urlpatterns = [
@@ -30,8 +31,9 @@ urlpatterns = [
     path(r'detail/', vsgoods.detail, name='detail'),
     path(r'add_trolly/', vsop.add_trolly, name='add_trolly'),
     path(r'trolly/', vsop.trolly, name='trolly'),
-
+    path(r'order/', vsop.order, name='order'),
     path(r'user/', vsusers.user_info, name='user'),
+    path(r'user_order/', vsusers.user_order, name='user_order'),
     path(r'user_order/', vsusers.user_order, name='user_order'),
     path(r'user_addr/', vsusers.user_address, name='user_addr'),
     path(r'addr_add/', vsusers.add_address, name='addr_add'),

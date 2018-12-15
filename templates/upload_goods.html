@@ -85,7 +85,7 @@
 
                         <div class="form-group marb8 ">
                             <label>商品种类</label>
-                            <select name="type" id="type" onchange="check()">
+                            <select name="type" id="type" onchange="check()" class="mul_sl">
 
                                 <option value="" >--请选择--</option>
                                 <option value="校园卡" >校园卡</option>
@@ -108,13 +108,11 @@
                                 <label>结束时间</label>
                                 <input type="date"  name="to_time"  value=""  />
                             </div>
-{#                        {% endif %}#}
-{#                        {% if room %}#}
                             <div class="form-group marb8 " id="room" style="display: none">
                                 <label>详细地址</label>
                                 <input type="text"  name="location"  value="" placeholder="请输入详细地址" />
                             </div>
-{#                        {% endif %}#}
+
                         <div class="form-group marb8 ">
                             <label>数量</label>
                             <input type="text"  name="num"  value="" placeholder="请输入拥有数量" />
@@ -128,15 +126,8 @@
                        <div class="form-group marb8 " onchange="slt_image()">
                             <label >实物图片</label>
                             {% csrf_token %}
-                            <input type="file" name="image" />选择图片<br />
+                            <input type="file" name="image" onchange=""/>选择图片<br />
                         </div>
-
-
-                        <div class="form-group marb8 " id="image">
-                                <img src="{{ img.url }}" style="width: 20px; height: 20px;"><br/>
-                        </div>
-
-
                         <div>
                             {% if errmsg %}
                              <lable class="warn">{{ errmsg }}</lable>
@@ -145,7 +136,6 @@
                         <div class="auto-box marb8">
                             <input class="btn btn-green" id="jsEmailRegBtn" type="submit" value="提交" />
                         </div>
-
                     <input type='hidden' name='csrfmiddlewaretoken' value='5I2SlleZJOMUX9QbwYLUIAOshdrdpRcy' />
                     </form>
                 </div>

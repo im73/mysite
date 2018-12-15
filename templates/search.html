@@ -38,7 +38,7 @@
             <p class="fl hd-tips">北航二手交易平台！</p>
             <ul class="fr hd-bar">
                 {% if user %}
-                    <li class="active"><a href="../user.html">{{ user.nick_name }}</a></li>
+                    <li class="active"><a href="../user">{{ user.nick_name }}</a></li>
                     <li><a href="../uploadgoods">上传物品</a></li>
                     <li><a href="../trolly">购物车</a></li>
                 {% else %}
@@ -51,7 +51,7 @@
 </header>
 
 	<div class="search_bar clearfix">
-        <a href="index.html" class="logo fl"><img src="images/logo.png" style="width: 160px; height: 53px;"></a>
+       <a href="index.html" class="logo fl"><img src="../static/images/buaa.jpg" style="width: 120px; height: 80px;"></a>
 		<div class="search_con fl">
             <form method="post" action={% url 'search' %}>
 			<input type="text" class="input_text fl" name="msg" placeholder="搜索商品">

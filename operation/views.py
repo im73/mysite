@@ -1,7 +1,10 @@
-from django.shortcuts import render
 
-from operation.models import Trolly
-from users.models import UserProfile
+
+from django.http import HttpResponseRedirect
+from django.shortcuts import render,reverse
+
+from operation.models import Trolly, UserOrder
+from users.models import UserProfile, Useradress
 from goods.models import Goods
 # Create your views here.
 
@@ -59,5 +62,36 @@ def trolly(request):
         gd=Goods.objects.get(id=good['goods_id'])
         total_price=total_price+good['num']*gd.price
         total_num=total_num+1
-
     return render(request, 'trolly.html', {'goods_set': goods_set, 'user': user,'total_price':total_price,'total_num':total_num})
+
+
+
+def order(request):
+
+    if not request.session.get('userName', None):
+        return render(request, "login.html")
+    nick_name=request.session.get('userName', None)
+    user = UserProfile.objects.get(nick_name=nick_name)
+    goods_set = Trolly.objects.filter(user=user)
+    total_num = 0
+    total_price = 0
+    flag=0
+    for good in goods_set.values():
+
+        gd = Goods.objects.get(id=good['goods_id'])
+
+        total_price = total_price+good['num']*gd.price
+        total_num = total_num + 1
+
+        if request.GET.get('submit', None):
+            new_order=UserOrder(goods=gd,state=0,price=gd.price*good['num'],buyer=user,adress=Useradress.objects.filter(user=user).last())
+            new_order.save()
+            flag=1
+    if flag:
+        return HttpResponseRedirect(reverse('home'))
+    addrs = Useradress.objects.filter(user_id=user.id)
+
+    return render(request, 'order.html',
+                  {'goods_set': goods_set, 'user': user, 'total_price': total_price, 'total_num': total_num, 'addrs':addrs})
+
+

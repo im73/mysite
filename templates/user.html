@@ -47,11 +47,7 @@
         		</div>
                 <div class="right_content clearfix">
                     <div class="info_con clearfix">
-                        <div class="navbar_con">
-    		                <div class="navbar">
-                    			<h1 class="fl">基本信息</h1>
-                    		</div>
-                	    </div>
+                        <h3 class="common_title2">基本信息</h3>
                         <ul class="user_info_list">
                             <li><span>用户名：</span>{{ user.nick_name }}</li>
                             <li><span>性别：</span>{{ user.gender }}</li>
@@ -60,7 +56,7 @@
                             <li><span>邮箱：</span>{{ user.email }}</li>
                             <li><span>年级：</span>{{ user.grade }}</li>
                             <li><span>专业：</span>{{ user.major }}</li>
-                            <li><span>头像：</span>{{ user.image }}</li>
+                            <li><span>头像：</span><img src="{{ user.image.url }}" style="width: 100px; height: 100px;"><br/></li>
                         </ul>
                     </div>
                 </div>

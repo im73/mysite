@@ -35,6 +35,19 @@
     {
         alert("加入成功");
     }
+    function user_info() {
+        document.getElementById("owner_msg").className="active"
+        document.getElementById("good_msg").className=""
+        document.getElementById("detail_msg").style.display="none"
+        document.getElementById("user_msg").style.display="block"
+
+    }
+    function good_info() {
+        document.getElementById("good_msg").className="active"
+        document.getElementById("owner_msg").className=""
+        document.getElementById("detail_msg").style.display="block"
+        document.getElementById("user_msg").style.display="none"
+    }
 </script>
 <body>
 	<header>
@@ -43,7 +56,7 @@
             <p class="fl hd-tips" >北航二手交易平台！</p>
             <ul class="fr hd-bar">
                 {% if user %}
-                    <li class="active"><a href="../user.html">{{ user.nick_name }}</a></li>
+                    <li class="active"><a href="../user">{{ user.nick_name }}</a></li>
                     <li><a href="../uploadgoods">上传物品</a></li>
                     <li><a href="../trolly">购物车</a></li>
                 {% else %}
@@ -61,7 +74,7 @@
 			<form method="post" action={% url 'search' %}>
 			<input type="text" class="input_text fl" name="msg" placeholder="搜索商品">
 			<input type="submit" class="input_btn fr" name="" value="搜索">
-            </form>>
+            </form>
 		</div>
 
 	</div>
@@ -126,14 +139,25 @@
 
 		<div class="r_wrap fr clearfix">
 			<ul class="detail_tab clearfix">
-				<li class="active">商品介绍</li>
-				<li>评论</li>
+				<li class="active" id="good_msg" onclick="good_info()">商品介绍</li>
+				<li id="owner_msg" onclick="user_info()">卖家信息</li>
 			</ul>
 
-			<div class="tab_content">
+			<div class="tab_content" id="detail_msg" style="display: block">
 				<dl>
 					<dt>商品详情：</dt>
-					<dd>{{ good.desc }}</dd>
+					<dt>{{ good.desc }}</dt>
+				</dl>
+			</div>
+            <div class="tab_content" id="user_msg" style="display: none">
+				<dl>
+					<dt>卖家信息：</dt>
+                    <dt>用户名:{{ good.owner.nick_name }}     </dt>
+                    <dt>性别:{{ good.owner.gender }}    </dt>
+                    <dt>QQ:{{ good.owner.qq }}     </dt>
+                    <dt>手机号:{{ good.owner.mobile }}     </dt>
+                    <dt>邮箱:{{ good.owner.email }}     </dt>
+                    <dt>年级:{{ good.owner.grade }}  </dt>
 				</dl>
 			</div>
 

@@ -12,19 +12,20 @@ def user_info(request):
     return render(request,'user.html',{'user':user})
 
 def user_order(request):
+
     nick_name=request.session.get('userName', None)
     page=request.GET.get('page')
     user = UserProfile.objects.get(nick_name=nick_name)
-    order_li = UserOrder.objects.filter(id=user.id)
+    order_li = UserOrder.objects.filter(buyer=user)
 
     # 遍历获取订单的商品信息
     # order->OrderInfo实例对象
-    for order in order_li:
+    order_addr=0
+    for order in order_li.values():
+        print(order)
         # 根据订单id查询订单商品信息
-        addr_id = order.order_id
-        order_addr = Useradress.objects.get(id=addr_id)
-        order.addr=order_addr
 
+        order_addr = Useradress.objects.get(id=order['adress_id'])
 
     paginator = Paginator(order_li, 3)  # 每页显示3个订单
 
@@ -52,6 +53,7 @@ def user_order(request):
         'order_li': order_li,
         'pages': pages,
         'user': user,
+        'addr':order_addr,
     }
 
     return render(request, 'user_order.html', context)
