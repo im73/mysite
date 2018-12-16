@@ -7,7 +7,6 @@ from goods.models import Goods
 dicts={'校园卡':1,'床位出租':2,'考研资料':3,'电子设备':4,'教材':5,'其他':6}
 
 def upload_goods(request):
-
     if not request.session.get('userName',None):
         return render(request, "login.html")
     if request.method =="POST":

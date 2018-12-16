@@ -42,7 +42,8 @@ def register(request):
             # 进行业务处理:注册，向账户系统中添加账户
             # Passport.objects.create(username=username, password=password, email=email)
         try:
-            user=UserProfile(username=nick_name,nick_name=nick_name,gender=gender,mobile=mobile,major=major,image=image,email=email,qq=qq,password=password)
+            user=UserProfile(username=nick_name,nick_name=nick_name,gender=gender,mobile=mobile,major=major,image=image,
+                             email=email,qq=qq,password=password)
             if image!=None :
                 user.image=image
             if grade!=None :
