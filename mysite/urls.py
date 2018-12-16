@@ -37,6 +37,7 @@ urlpatterns = [
     path(r'user_order/', vsusers.user_order, name='user_order'),
     path(r'user_addr/', vsusers.user_address, name='user_addr'),
     path(r'addr_add/', vsusers.add_address, name='addr_add'),
+    path(r'user_good/', vsusers.user_good, name='user_good'),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

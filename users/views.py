@@ -5,6 +5,7 @@ from django.core.paginator import Paginator
 from users.models import UserProfile
 from users.models import Useradress
 from operation.models import UserOrder
+from goods.models import Goods
 
 def user_info(request):
     nick_name = request.session.get('userName', None)
@@ -25,7 +26,8 @@ def user_order(request):
         print(order)
         # 根据订单id查询订单商品信息
 
-        order_addr = Useradress.objects.get(id=order['adress_id'])
+        order.addr = Useradress.objects.get(id=order['adress_id'])
+        order.goods = Goods.objects.get(id=order['goods_id'])
 
     paginator = Paginator(order_li, 3)  # 每页显示3个订单
 
@@ -53,7 +55,8 @@ def user_order(request):
         'order_li': order_li,
         'pages': pages,
         'user': user,
-        'addr':order_addr,
+#        'addr': order_addr,
+#        'goods': goods,
     }
 
     return render(request, 'user_order.html', context)
@@ -91,3 +94,13 @@ def add_address(request):
             return render(request, 'addr_add.html', {'errmsg': '用户名已存在！', 'user': user})
         return render(request, 'addr_add.html', {'addr': addr, 'user': user})
     return render(request, 'addr_add.html', {'user': user})
+
+def user_good(request):
+    nick_name = request.session.get('userName', None)
+    user = UserProfile.objects.get(nick_name=nick_name)
+    good_li = Goods.objects.filter(owner_id=user.id)
+    context = {
+        'good_li': good_li,
+        'user': user,
+    }
+    return render(request, 'user_good.html', context)
