@@ -78,6 +78,9 @@ def check_Order(**kwargs):
     Trolly.objects.get(goods=kwargs['instance'].goods).delete()
     kwargs['instance'].goods.num=kwargs['instance'].goods.num-kwargs['instance'].num
     kwargs['instance'].goods.save()
+
+
+
      # rst=Trolly.objects.filter(goods=kwargs['goods'],user=kwargs['user'])
      # if rst:
      #     kwargs['num']=rst.values('num')+kwargs['num']

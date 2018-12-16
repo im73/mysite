@@ -7,7 +7,12 @@ class  mysql_con(object):
         self.conn=con
         cursor=self.conn.cursor()
 
-
+    def chek_p(self,name,pd):
+        sql_order = 'call check_p(\'%s\',\'%s\');'%(name,pd)
+        cursor = self.conn.cursor()
+        cursor.execute(sql_order)
+        data = cursor.fetchall()
+        return data
 
 
     def close_conn(self):
