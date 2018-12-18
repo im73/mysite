@@ -76,3 +76,5 @@ def login(request):
             return render(request,"login.html",{'errmsg':'用户名或密码输入错误'})
     return render(request,"login.html",{'errmsg':None})
 
+def toindex(request):
+    return HttpResponseRedirect(reverse('home'))

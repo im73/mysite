@@ -22,12 +22,12 @@ def user_order(request):
     # 遍历获取订单的商品信息
     # order->OrderInfo实例对象
     order_addr=0
-    for order in order_li.values():
-        print(order)
-        # 根据订单id查询订单商品信息
-
-        order.addr = Useradress.objects.get(id=order['adress_id'])
-        order.goods = Goods.objects.get(id=order['goods_id'])
+    # for order in order_li.values():
+    #     print(order)
+    #     # 根据订单id查询订单商品信息
+    #
+    #     order.addr = Useradress.objects.get(id=order['adress_id'])
+    #     order.goods = Goods.objects.get(id=order['goods_id'])
 
     paginator = Paginator(order_li, 3)  # 每页显示3个订单
 

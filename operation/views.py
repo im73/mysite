@@ -94,4 +94,9 @@ def order(request):
     return render(request, 'order.html',
                   {'goods_set': goods_set, 'user': user, 'total_price': total_price, 'total_num': total_num, 'addrs':addrs})
 
+def delete_order(request):
+    order_id=request.GET.get('order_id')
+    order=UserOrder.objects.get(id=order_id)
+    order.delete()
+    return HttpResponseRedirect(reverse('user_order'))
 

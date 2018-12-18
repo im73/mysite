@@ -22,7 +22,7 @@ from users import views as vsusers
 from django.conf.urls.static import static
 from django.conf import settings
 urlpatterns = [
-
+    path(r'', vsindex.toindex, name='tohome'),
     path(r'index/', vsgoods.index, name='home'),
     path(r'login/', vsindex.login, name='login'),
     path(r'register/', vsindex.register, name='register'),
@@ -34,10 +34,10 @@ urlpatterns = [
     path(r'order/', vsop.order, name='order'),
     path(r'user/', vsusers.user_info, name='user'),
     path(r'user_order/', vsusers.user_order, name='user_order'),
-    path(r'user_order/', vsusers.user_order, name='user_order'),
     path(r'user_addr/', vsusers.user_address, name='user_addr'),
     path(r'addr_add/', vsusers.add_address, name='addr_add'),
     path(r'user_good/', vsusers.user_good, name='user_good'),
+    path(r'delete_order/',vsop.delete_order,name='delete_order'),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

@@ -3,7 +3,7 @@ from datetime import datetime
 from django.db import models
 #_*_coding:utf-8_*_
 # Create your models here.
-from django.db.models.signals import pre_save, pre_init, post_save
+from django.db.models.signals import pre_save, pre_init, post_save, post_delete, pre_delete
 from django.dispatch import receiver
 
 from users.models import UserProfile, Useradress
@@ -79,6 +79,13 @@ def check_Order(**kwargs):
     kwargs['instance'].goods.num=kwargs['instance'].goods.num-kwargs['instance'].num
     kwargs['instance'].goods.save()
 
+
+
+@receiver(pre_delete, sender=UserOrder)
+def delete_Order(**kwargs):
+
+    kwargs['instance'].goods.num=kwargs['instance'].goods.num+kwargs['instance'].num
+    kwargs['instance'].goods.save()
 
 
      # rst=Trolly.objects.filter(goods=kwargs['goods'],user=kwargs['user'])

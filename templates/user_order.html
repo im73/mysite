@@ -6,8 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" >
     <title>北航跳蚤市场</title>
     <link rel="stylesheet" type="text/css" href="../static/css/reset.css" >
-	<link rel="stylesheet" type="text/css" href="../static/css/index.css" >
-    <link rel="stylesheet" type="text/css" href="../static/css/login.css" >
+    <link rel="stylesheet" type="text/css" href="../static/css/main.css" >
 </head>
 
 <script>
@@ -53,11 +52,16 @@
     </div>
 </header>
 <section>
-    <div class="c-box bg-box">
-        <div class="login-box clearfix">
-            <div class="hd-login clearfix">
-                <a class="index-font" href="../index">回到首页</a>
-            </div>
+    <div class="search_bar clearfix">
+		<a href="../index" class="logo fl"><img src="../static/images/buaa.jpg" style="width: 120px; height: 80px;"></a>
+		<div class="search_con fl">
+			<form method="post" action={% url 'search' %}>
+			<input type="text" class="input_text fl" name="msg" placeholder="搜索商品">
+			<input type="submit" class="input_btn fr" name="" value="搜索">
+            </form>>
+		</div>
+	</div>
+
             <div class="main_con clearfix">
         		<div class="left_menu_con clearfix">
                     <div class="navbar_con">
@@ -86,7 +90,13 @@
                             <ul class="order_list_th w978 clearfix">
                                 <li class="col01">{{ order.add_time }}</li>
                                 <li class="col02">订单号：{{ order.id }}</li>
-                                <li class="col02 stress">{{ order.state | order_status }}</li>
+                                <li class="col02 stress">
+                                    {% if order.state %}
+                                            已支付
+                                        {% else %}
+                                            未支付
+                                        {% endif %}
+                                </li>
                             </ul>
                             <table class="order_list_table w980">
                                 <tbody>
@@ -94,15 +104,21 @@
                                     <td width="55%">
                                         {# 遍历出来的order_books是一个OrderGoods对象 #}
                                         <ul class="order_book_list clearfix">
-                                            <li class="col01"><img src="{% static order.goods.image %}"></li>
+                                            <li class="col01"><img src="{{   order.goods.image.url }}"></li>
                                             <li class="col02">{{ order.goods.name }}<em>{{ order.goods.price }}元</em></li>
                                             <li class="col03">{{ order.num }}</li>
                                             <li class="col04">{{ order.price }}元</li>
                                         </ul>
                                     </td>
                                     <td width="15%">{{ order.price }}元</td>
-                                    <td width="15%">{{ order.state | order_status}}</td>
-                                    <td width="15%"><a href="#" order_id="{{ order.id }}" order_status="{{ order.status }}" class="oper_btn">去付款</a></td>
+                                    <td width="15%">
+                                        {% if order.state %}
+                                            已付款
+                                        {% else %}
+                                            未付款
+                                        {% endif %}
+                                    </td>
+                                    <td width="15%"><a href="../delete_order/?order_id={{ order.id }}"  class="oper_btn">撤销订单</a></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -125,8 +141,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+
 </section>
 
 </body>

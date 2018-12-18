@@ -73,6 +73,7 @@ def search(request):
         return render(request,'search.html',{'user':user,'goods_set':goods_set})
     type=request.GET.get('type')
 
+
     if type:
         type_s=type
         type=dicts[type]

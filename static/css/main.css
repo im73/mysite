@@ -9,11 +9,6 @@ html,body{height:100%}
 	border-bottom:1px solid #dddddd
 }
 
-.header{
-	width:1200px;
-	height:29px;
-	margin:0 auto;
-}
 
 .welcome,.login_info,.login_btn,.user_link{
 	line-height:29px;
@@ -647,4 +642,39 @@ html,body{height:100%}
 	position: center;
 	text-align: center;
 }
+.hd-tips{
 
+}
+.hd-bar > li{
+    float:left;
+    padding:0 26px;
+    border-right:1px solid #eaeaea;
+}
+.hd-bar > li > span{
+    color:#fa8341;
+    font-weight:bold;
+}
+.hd-bar > li > a{
+    color:#666;
+}
+.hd-bar > li.active > a,
+.hd-bar > li > a:hover {
+    color:#67ac53;
+}
+.c-box{
+    width:100%;
+    min-width: 1190px;
+    overflow:hidden;
+}
+.fff-box{
+    background:#fff;
+}
+
+.header-box{
+    width:1190px;
+    height:38px;
+    line-height:38px;
+    margin:0 auto;
+    font-size:14px;
+    color:#666;
+}

@@ -6,8 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" >
     <title>北航跳蚤市场</title>
     <link rel="stylesheet" type="text/css" href="../static/css/reset.css" >
-	<link rel="stylesheet" type="text/css" href="../static/css/index.css" >
-    <link rel="stylesheet" type="text/css" href="../static/css/login.css" >
+    <link rel="stylesheet" type="text/css" href="../static/css/main.css" >
 </head>
 <body>
 <div class="bg" id="dialogBg"></div>
@@ -24,11 +23,16 @@
     </div>
 </header>
 <section>
-    <div class="c-box bg-box">
-        <div class="login-box clearfix">
-            <div class="hd-login clearfix">
-                <a class="index-font" href="../index">回到首页</a>
-            </div>
+    <div class="search_bar clearfix">
+		<a href="../index" class="logo fl"><img src="../static/images/buaa.jpg" style="width: 120px; height: 80px;"></a>
+		<div class="search_con fl">
+			<form method="post" action={% url 'search' %}>
+			<input type="text" class="input_text fl" name="msg" placeholder="搜索商品">
+			<input type="submit" class="input_btn fr" name="" value="搜索">
+            </form>>
+		</div>
+	</div>
+
             <div class="main_con clearfix">
         		<div class="left_menu_con clearfix">
                     <div class="navbar_con">
@@ -66,8 +70,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+
 </section>
 
 
