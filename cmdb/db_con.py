@@ -9,6 +9,7 @@ class  mysql_con(object):
 
     def chek_p(self,name,pd):
         sql_order = 'call check_p(\'%s\',\'%s\');'%(name,pd)
+        print(sql_order)
         cursor = self.conn.cursor()
         cursor.execute(sql_order)
         data = cursor.fetchall()

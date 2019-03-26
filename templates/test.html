@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" >
+    <title>使用视频作为网页背景</title>
+    <head>
+
+    <style type="text/css">
+    video#bgvid {
+            position: fixed;
+          right:0;
+          bottom: 0;
+          min-width: 100%;
+          min-height: 100%;
+          width: auto;
+          height: auto;
+          z-index: -9999;
+          /*灰色调*/
+          -webkit-filter:grayscale(100%)
+        }
+    </style>
+
+</head>
+<body>
+    <video  muted autoplay="autoplay" controls="controls" id="bgvid"  loop="loop">
+        <source src="../static/vedio/test.mp4" type="video/mp4">
+    </video>
+    <span >sfebwhjdhwedcew</span>
+</body>
+<script >
+     var video= document.getElementById('bgvid');
+    video.playbackRate = 0.5;
+</script>
+</html>

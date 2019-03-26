@@ -15,12 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.views.generic import TemplateView
+
 from cmdb import views as vsindex
 from operation import views as vsop
 from goods import views as vsgoods
 from users import views as vsusers
 from django.conf.urls.static import static
 from django.conf import settings
+
 urlpatterns = [
     path(r'', vsindex.toindex, name='tohome'),
     path(r'index/', vsgoods.index, name='home'),
@@ -38,6 +41,6 @@ urlpatterns = [
     path(r'addr_add/', vsusers.add_address, name='addr_add'),
     path(r'user_good/', vsusers.user_good, name='user_good'),
     path(r'delete_order/',vsop.delete_order,name='delete_order'),
-
+path(r'test/',TemplateView.as_view(template_name="test.html"),name='deleteer'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

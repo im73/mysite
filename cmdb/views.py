@@ -67,8 +67,6 @@ def login(request):
             return render (request,"login.html",  {'errmsg': '用户名或密码为空'})
         db = con.mysql_con()
         if db.chek_p(name=username,pd=password)[0][0]:
-        # users=UserProfile.objects.filter(nick_name=username,password=password)
-        # if users :
             request.session['userName'] = username
             return HttpResponseRedirect(reverse('home'))
         else:

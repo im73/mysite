@@ -88,8 +88,5 @@ def delete_Order(**kwargs):
     kwargs['instance'].goods.save()
 
 
-     # rst=Trolly.objects.filter(goods=kwargs['goods'],user=kwargs['user'])
-     # if rst:
-     #     kwargs['num']=rst.values('num')+kwargs['num']
-     #     rst.delete()
+
 
